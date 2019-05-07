@@ -20,23 +20,34 @@ void CreateStack(Stack& Top);
 void CreateElement(pointer& pBaru);
 void push(Stack& Top, pointer pBaru);
 void Pop(Stack& Top, pointer& pHapus);
-void print(Stack Top);
+void output(Stack Top);
 
 int main()
 {
     pointer p;
-    Stack s;
+    Stack a, b;
     int n;
 
-    CreateStack(s);
-	cout<< "--------------------------------\n";
+    CreateStack(a);
+
     cout << "Masukkan jumlah stack: "; cin >> n;
     for(int i=0;i<n;i++){
         CreateElement(p);
-        push(s,p);
+        push(a,p);
+    }
+
+    cout << endl;
+    cout << "Push : ";
+    output(a);
+
+    CreateStack(b);
+    for (int i=n;i>0;i--){
+        Pop(a,p);
+        push(b,p);
     }
     cout << endl;
-    print(s);
+    cout << "Reverse Stack: ";
+    output(b);
 }
 
 void CreateStack(Stack& Top){
@@ -75,12 +86,10 @@ void Pop(Stack& Top, pointer& pHapus){
     }
 }
 
-void print(Stack Top){
-	cout<< "--------------------------------\n";
-    cout << "Reverse Word : ";
+void output(Stack Top){
     pointer temp;
     if(Top==NULL){
-        cout << "List Kosong";
+        cout << "Stack Kosong";
     }
     else{
         temp = Top;

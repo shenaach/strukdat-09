@@ -6,67 +6,74 @@ NPM				: 140810180022
 Deskripsi		: Stack Array
 */
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 const int maxElemen = 255;
 struct Stack{
     char isi[maxElemen];
-    int Top;
+    char TOP;
 };
 Stack S;
 
-void createStack(Stack& S);
+void createStack (Stack& S);
 void push(Stack& S, char elemenBaru);
-void pop(Stack& S, char& elemenHls);
-void output(Stack S);
+void pop(Stack& S, char& elemenHsl);
+void output(Stack& S);
 
-int main(){
-    Stack s;
+int main()
+{
+    Stack s1, s2;
     int n;
-    char data;
+    char x;
 
-    createStack(s);
-	
-	cout<< "--------------------------------\n";
-    cout << "Input banyak huruf : "; cin >> n;
-    for (int i = 0; i<n; i++){
-        cout << "Masukkan satu huruf: "; cin >> data;
-        push(s, data);
+    cout << "Input jumlah stack : "; cin >> n;
+    createStack(s1);
+    for(int i=0;i<n;i++){
+        //cout << "Input huruf: "; 
+		cin >> x;
+        push(s1,x);
     }
-    cout<< "--------------------------------\n";
+
+    cout << "Push: ";
+    output(s1);
+
+    createStack(s2);
+    for (int i=s1.TOP;i>=0;i--){
+        pop(s1,x);
+        push(s2,x);
+    }
+    cout << endl;
     cout << "Reverse Word: ";
-    output(s);
+    output(s2);
 }
 
-void createStack(Stack& S){
-    S.Top = -1;
+void createStack (Stack& S){
+    S.TOP = -1;
 }
 
 void push(Stack& S, char elemenBaru){
-    if (S.Top == maxElemen - 1){
+    if(S.TOP == maxElemen-1){
         cout << "Tumpukan sudah penuh" << endl;
     }
-    else {
-        S.Top++;
-        S.isi[S.Top] = elemenBaru;
+    else{
+        S.TOP = S.TOP + 1;
+        S.isi[S.TOP] = elemenBaru;
     }
 }
 
-void pop(Stack& S, char& elemenHls){
-    if (S.Top < 0){
-        cout << "Tumpukan kosong" << endl;
+void pop(Stack& S, char& elemenHsl){
+    if(S.TOP < 0){
+        cout << "Tumpukan sudah kosong" << endl;
     }
-    else {
-        elemenHls = S.isi[S.Top];
-        S.Top--;
+    else{
+        elemenHsl = S.isi[S.TOP];
+        S.TOP = S.TOP - 1;
     }
 }
 
-void output(Stack S){
-    char temp;
-    while(S.Top != -1){
-        pop(S,temp);
-        cout << temp;
+void output(Stack& S){
+    for(int i=S.TOP;i>=0;i--){
+        cout << S.isi[i] << " ";
     }
 }
