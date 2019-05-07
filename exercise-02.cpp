@@ -16,6 +16,29 @@ struct ElemtList{
 typedef ElemtList* pointer;
 typedef pointer Stack;
 
+void CreateStack(Stack& Top);
+void CreateElement(pointer& pBaru);
+void push(Stack& Top, pointer pBaru);
+void Pop(Stack& Top, pointer& pHapus);
+void print(Stack Top);
+
+int main()
+{
+    pointer p;
+    Stack s;
+    int n;
+
+    CreateStack(s);
+	cout<< "--------------------------------\n";
+    cout << "Masukkan jumlah stack: "; cin >> n;
+    for(int i=0;i<n;i++){
+        CreateElement(p);
+        push(s,p);
+    }
+    cout << endl;
+    print(s);
+}
+
 void CreateStack(Stack& Top){
     Top = NULL;
 }
@@ -27,7 +50,6 @@ void CreateElement(pointer& pBaru){
 }
 
 void push(Stack& Top, pointer pBaru){
-    cout << "Push Stack" << endl;
     if (Top==NULL){
         Top = pBaru;
     }
@@ -38,7 +60,6 @@ void push(Stack& Top, pointer pBaru){
 }
 
 void Pop(Stack& Top, pointer& pHapus){
-    cout << "Pop Stack" << endl;
     if (Top==NULL){
         cout << "Stack Kosong" << endl;
         pHapus = NULL;
@@ -54,36 +75,19 @@ void Pop(Stack& Top, pointer& pHapus){
     }
 }
 
-void traversal(Stack Top){
-    cout << "LIST : ";
-    pointer pBantu;
+void print(Stack Top){
+	cout<< "--------------------------------\n";
+    cout << "Reverse Word : ";
+    pointer temp;
     if(Top==NULL){
         cout << "List Kosong";
     }
     else{
-        pBantu=Top;
+        temp = Top;
         do{
-            cout << pBantu->info << " ";
-            pBantu = pBantu->next;
-        } while(pBantu != NULL);
+            cout << temp->info << " ";
+            temp = temp->next;
+        } while(temp != NULL);
     }
     cout << endl;
-}
-
-int main()
-{
-    pointer p;
-    Stack s;
-    int n;
-
-    CreateStack(s);
-
-    cout << "Masukkan jumlah stack: "; cin >> n;
-    for(int i=0;i<n;i++){
-        CreateElement(p);
-        push(s,p);
-    }
-
-    cout << endl;
-    traversal(s);
 }
